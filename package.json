@@ -22,7 +22,7 @@
   "scripts": {
     "start": "gulp",
     "build": "gulp build",
-    "deploy": "gulp deploy",
+    "deploy": "gulp build && gulp deploy",
     "styles": "gulp styles",
     "scripts": "gulp js",
     "editorconfig": "editorconfig-cli"
