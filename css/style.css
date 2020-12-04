@@ -805,8 +805,7 @@ blockquote {
 
 .page-shop__products-title {
   color: #C7C7C7;
-  line-height: 150%;
-  border-bottom: 1px solid; }
+  line-height: 150%; }
   @media (max-width: 991px) {
     .page-shop__products-title {
       display: none;
@@ -816,7 +815,8 @@ blockquote {
       font-size: 23px;
       margin-bottom: 40px; } }
   .page-shop__products-title p {
-    display: inline-block; }
+    display: inline-block;
+    border-bottom: 1px solid; }
 
 .page-shop__filters {
   list-style: none;
@@ -831,6 +831,7 @@ blockquote {
     width: 140px; } }
 
 .page-shop__filter-text {
+  display: inline-block;
   cursor: pointer; }
   .page-shop__filter-text--active, .page-shop__filter-text:hover {
     color: #FF994F; }
