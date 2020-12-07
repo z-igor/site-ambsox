@@ -1,5 +1,6 @@
 $(document).ready(function () {
   const PageMain = $(".js-page-main");
+  const PageFooter = $(".js-page-footer");
   const BurgerMenuBtn = $(".js-burger-icon");
   const NavHeaderMenu = $(".js-nav-menu");
   const HideMobmenuBtn = $(".js-hide-mobmenu");
@@ -11,9 +12,15 @@ $(document).ready(function () {
 
   const SwiperForSales = $(".js-swiper").length ? new Swiper('.js-swiper', {
     slidesPerView: "auto",
+    centerInsufficientSlides: true,
     spaceBetween: 32,
     slidesOffsetAfter: 16,
-    slidesOffsetBefore: $(window).width() >= "992" ? 130 : 16,
+    slidesOffsetBefore: 16,
+    breakpoints: {
+      992: {
+        slidesOffsetBefore: 130
+      }
+    }
   }) : null;
 
   const SwiperForInspiration = $(".js-inspiration-swiper").length ? new Swiper('.js-inspiration-swiper', {
@@ -22,6 +29,11 @@ $(document).ready(function () {
     observeParents: true,
     spaceBetween: 14,
     slidesOffsetAfter: 14,
+    breakpoints: {
+      992: {
+        direction: "vertical"
+      }
+    }
   }) : null;
 
   let SwiperForShopFilters = $(".js-shop-filters-swiper").length ? new Swiper('.js-shop-filters-swiper', {
@@ -33,21 +45,13 @@ $(document).ready(function () {
     slidesPerView: "auto",
     spaceBetween: 25,
     autoHeight: true,
+    centerInsufficientSlides: true,
     breakpoints: {
       992: {
         spaceBetween: 30,
       }
     }
   }) : null;
-
-  /* change offset before of swipper container/wrapper */
-  function changeOffsetBeforeSwiper(swiper, offset) {
-    if (swiper) {
-      swiper.params.slidesOffsetBefore = offset;
-
-      swiper.update();
-    }
-  }
 
   if ($(window).scrollTop() >= HeaderMenu.height()) {
     HeaderMenu.addClass("page-header--bg-white");
@@ -75,30 +79,22 @@ $(document).ready(function () {
     }
   });
 
-  if ($(window).width() >= "992") {
-    if (SwiperForInspiration) {
-      SwiperForInspiration.changeDirection("vertical");
-    }
-  }
-
-  $(window).resize(function () {
-    if ($(window).width() >= "992") {
-      if (SwiperForInspiration) {
-        SwiperForInspiration.changeDirection("vertical");
-      }
-      changeOffsetBeforeSwiper(SwiperForSales, 130);
-    } else {
-      if (SwiperForInspiration) {
-        SwiperForInspiration.changeDirection("horizontal");
-      }
-      changeOffsetBeforeSwiper(SwiperForSales, 16);
-    }
-  });
-
   [BurgerMenuBtn, HideMobmenuBtn].forEach(function (item) {
     item.on("click", function (evt) {
+      let cEvt = evt.currentTarget;
+      // let tEvt = evt.target;
+
       NavHeaderMenu.toggleClass("page-header__nav--show");
-      PageMain.toggle();
+
+      if (cEvt.tagName === "DIV") {
+        setTimeout(function () {
+          PageMain.toggle();
+          PageFooter.toggle();
+        }, 300);
+      } else if (cEvt.tagName === "LI") {
+        PageMain.toggle();
+        PageFooter.toggle();
+      }
     });
   });
 

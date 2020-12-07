@@ -157,17 +157,21 @@ blockquote {
 
   @include mdx($tablet-width) {
     display: block;
+
+    &__btn {
+      background-color: transparent;
+      border: none;
+      outline: none;
+      cursor: pointer;
+
+      img {
+        vertical-align: middle;
+      }
+    }
   }
 
   @include mdn($tablet-width + 1) {
     display: none;
-  }
-
-  &__btn {
-    background-color: transparent;
-    border: none;
-    outline: none;
-    cursor: pointer;
   }
 }
 

@@ -178,17 +178,18 @@ blockquote {
 
 @media (max-width: 991px) {
   .hide-mobmenu {
-    display: block; } }
+    display: block; }
+    .hide-mobmenu__btn {
+      background-color: transparent;
+      border: none;
+      outline: none;
+      cursor: pointer; }
+      .hide-mobmenu__btn img {
+        vertical-align: middle; } }
 
 @media (min-width: 992px) {
   .hide-mobmenu {
     display: none; } }
-
-.hide-mobmenu__btn {
-  background-color: transparent;
-  border: none;
-  outline: none;
-  cursor: pointer; }
 
 .hyphen-list {
   list-style-type: none; }
@@ -222,7 +223,14 @@ blockquote {
         font-size: 18px;
         padding: 16px 20px; } }
   .btn-primary {
-    background-color: #FFC499; }
+    background-color: #FFC499;
+    transition: background .1s linear; }
+    .btn-primary:hover {
+      background-color: rgba(255, 196, 153, 0.7);
+      border: 1px solid rgba(255, 196, 153, 0.7); }
+    .btn-primary:active {
+      background-color: #FFC499;
+      border: 1px solid #FFC499; }
   .btn-secondary {
     background-color: #fff; }
 
@@ -269,7 +277,7 @@ blockquote {
       width: 100vw;
       height: 100vh;
       background-color: #EBEDEE;
-      transition: all .15s linear;
+      transition: all 0.15s linear;
       transform: translateX(100%); }
       .page-header__nav--show {
         transform: translateX(0); } }
@@ -281,7 +289,8 @@ blockquote {
       padding: 24px 20px;
       height: inherit;
       flex-flow: column nowrap;
-      justify-content: space-between; } }
+      justify-content: space-between;
+      overflow-x: auto; } }
   .page-header__nav-list {
     display: flex;
     flex-flow: row nowrap;
@@ -296,7 +305,7 @@ blockquote {
       flex-flow: column nowrap;
       justify-content: space-between; } }
   @media (max-width: 991px) {
-    .page-header__menu-list .menu-list__item:not(:last-child) {
+    .page-header__menu-list .menu-list__item {
       margin-bottom: 24px; } }
   @media (min-width: 992px) {
     .page-header__menu-list .menu-list__item:not(:last-child) {
@@ -339,6 +348,8 @@ blockquote {
     width: 32px;
     height: 32px;
     background-color: rgba(57, 57, 57, 0.2); }
+    .page-header__social-list .social-list__link:hover {
+      background-color: rgba(57, 57, 57, 0.8); }
     .page-header__social-list .social-list__link img {
       width: 15px; }
   @media (min-width: 992px) {
@@ -874,8 +885,7 @@ blockquote {
     width: 319px;
     padding: 24px;
     border-radius: 10px;
-    border: 1px solid #c7c7c7;
-    margin: 0 auto; }
+    border: 1px solid #c7c7c7; }
   .page-sale__title {
     font-size: 28px;
     color: #393939;
@@ -903,12 +913,19 @@ blockquote {
   .page-sale__list {
     font-family: "rubik", Arial, sans-serif;
     padding-left: 16px;
-    list-style: url(../../img/list-marker-circle.svg); }
+    margin-top: 0;
+    margin-bottom: 12px;
+    list-style: url(../img/list-marker-circle.svg); }
   .page-sale .page-text {
-    line-height: 24px; }
+    line-height: 24px;
+    margin-bottom: 12px; }
   .page-sale__list-item {
     font-size: 13px;
     margin-bottom: 12px; }
+  .page-sale__btns {
+    margin-bottom: 0; }
+  .page-sale__btn {
+    width: 100%; }
 
 @media (max-width: 991px) {
   .page-footer {
