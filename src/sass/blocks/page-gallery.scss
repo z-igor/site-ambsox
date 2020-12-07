@@ -1,0 +1,45 @@
+.page-gallery {
+  position: relative;
+  margin-bottom: 40px;
+
+  // @include mdx($tablet-width) {}
+
+  // @include mdn($tablet-width + 1) {}
+
+  &__container {
+    @include mdx($tablet-width) {
+      padding-top: 96px;
+    }
+    
+    @include mdn($tablet-width + 1) {
+      padding-top: 125px;
+    }
+  }
+
+  &__list {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+    align-self: center;
+  }
+
+  &__list-item {
+    max-width: 500px;
+    flex-basis: 40%;
+    height: 300px;
+
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+
+    margin-bottom: 10px;
+    margin-right: 5px;
+
+    img {
+      position: relative;
+      width: 100%;
+    }
+  }
+}
+
+/* end .page-gallery */
