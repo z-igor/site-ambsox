@@ -9,6 +9,10 @@ $(document).ready(function () {
   const HeaderShopingCart = $(".js-shoping-cart");
   const ShopFilters = $(".js-shop-filter");
   const ShopProducts = $(".js-shop-product");
+  const GalleryList = $(".js-gallery-list");
+  const GalleryListItems = $(".js-gallery-list-item");
+
+  let swiperActiveIndexGalleryPage = 0;
 
   const SwiperForSales = $(".js-swiper").length ? new Swiper('.js-swiper', {
     slidesPerView: "auto",
@@ -36,12 +40,12 @@ $(document).ready(function () {
     }
   }) : null;
 
-  let SwiperForShopFilters = $(".js-shop-filters-swiper").length ? new Swiper('.js-shop-filters-swiper', {
+  const SwiperForShopFilters = $(".js-shop-filters-swiper").length ? new Swiper('.js-shop-filters-swiper', {
     slidesPerView: "auto",
     spaceBetween: 16,
   }) : null;
 
-  let SwiperSaleList = $(".js-salelist-swiper").length ? new Swiper('.js-salelist-swiper', {
+  const SwiperSaleList = $(".js-salelist-swiper").length ? new Swiper('.js-salelist-swiper', {
     slidesPerView: "auto",
     spaceBetween: 25,
     autoHeight: true,
@@ -50,6 +54,28 @@ $(document).ready(function () {
       992: {
         spaceBetween: 30,
       }
+    }
+  }) : null;
+
+  const SwiperGalleryThumbs = $(".js-gallery-thumbs-swiper").length ? new Swiper('.js-gallery-thumbs-swiper', {
+    spaceBetween: 16,
+    slidesPerView: 6,
+    freeMode: true,
+    // watchSlidesVisibility: true,
+    centerInsufficientSlides: true,
+    initialSlide: swiperActiveIndexGalleryPage,
+  }) : null;
+
+  const SwiperGalleryTop = $(".js-gallery-top-swiper").length ? new Swiper('.js-gallery-top-swiper', {
+    spaceBetween: 16,
+    centerInsufficientSlides: true,
+    initialSlide: swiperActiveIndexGalleryPage,
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
+    },
+    thumbs: {
+      swiper: SwiperGalleryThumbs
     }
   }) : null;
 
@@ -128,4 +154,27 @@ $(document).ready(function () {
     });
   });
 
+  GalleryList.magnificPopup({
+    delegate: "figure",
+    type: "inline",
+    callbacks: {
+      open: function () {
+        if (SwiperGalleryTop && SwiperGalleryThumbs) {
+          SwiperGalleryTop.update();
+          SwiperGalleryThumbs.update();
+        }
+      },
+      elementParse: function (item) {
+        if (SwiperGalleryTop && SwiperGalleryThumbs) {
+          swiperActiveIndexGalleryPage = item.index;
+
+          SwiperGalleryTop.activeIndex = item.index;
+          SwiperGalleryThumbs.activeIndex = item.index;
+
+          SwiperGalleryTop.update();
+          SwiperGalleryThumbs.update();
+        }
+      },
+    }
+  });
 });
