@@ -442,9 +442,13 @@ blockquote {
   background-image: url(../img/drop-arrows.svg);
   background-size: contain;
   background-repeat: no-repeat;
-  background-position: right 10px; }
+  background-position: right -10px;
+  cursor: pointer; }
+  @media (max-width: 991px) {
+    .lang-selectbox {
+      margin-right: 30px; } }
   .lang-selectbox--up {
-    background-position: right -10px; }
+    background-position: right 10px; }
 
 /* end .lang-list */
 @media (max-width: 991px) {
