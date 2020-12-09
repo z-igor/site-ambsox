@@ -58,25 +58,26 @@
               </ul>
               <!-- end .nav-list -->
 
-              <ul
-                class="page-header__nav-list page-header__lang-list lang-list"
+              <div
+                class="page-header__nav-list page-header__lang-list lang-list js-select-langlist"
               >
-                <li class="lang-list__item">
-                  <a class="lang-list__link" href="#">RU</a>
-                </li>
-                <li class="lang-list__item">
-                  <a class="lang-list__link lang-list__link--active" href="#"
+                <div class="lang-selectbox">
+                  <a class="lang-list__link js-value-langlist" href="#">EN</a>
+                </div>
+                <div class="lang-list__items js-drop-langlist" style="display: none">
+                  <a class="lang-list__link-item" href="#">RU</a>
+                  <a class="lang-list__link-item" href="#"
                     >EN</a
                   >
-                </li>
-                <li
+                </div>
+                <div
                   class="page-header__hide-mobmenu hide-mobmenu js-hide-mobmenu"
                 >
                   <button class="hide-mobmenu__btn" type="button">
                     <img src="./img/icon-close.svg" alt="X" />
                   </button>
-                </li>
-              </ul>
+                </div>
+              </div>
               <!-- end .lang-list -->
 
               <ul

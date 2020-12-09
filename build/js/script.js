@@ -18,8 +18,8 @@ $(document).ready(function () {
   let swiperActiveIndexGalleryPage = 0;
 
   function checkDOMForSwiper(elm, obj) {
-    if ($(elm).length !== 0) {
-      return null
+    if (!$(elm).length) {
+      return null;
     }
 
     return new Swiper(elm, obj);
@@ -72,7 +72,6 @@ $(document).ready(function () {
     spaceBetween: 16,
     slidesPerView: 6,
     freeMode: true,
-    // watchSlidesVisibility: true,
     centerInsufficientSlides: true,
     initialSlide: swiperActiveIndexGalleryPage,
   });
@@ -196,16 +195,17 @@ $(document).ready(function () {
     });
   }
 
-  SelectboxLangList.on("click", function(e) {
+  SelectboxLangList.on("click", function (e) {
     if (e.target.tagName === "A") {
       SelectboxValueLangList.text(e.target.textContent);
     }
 
+    setTimeout(function () {
+      SelectboxDropLangList.hide();
+      $(".lang-selectbox").removeClass("lang-selectbox--up");
+    }, 1500);
+
     $(".lang-selectbox").toggleClass("lang-selectbox--up");
-
-    $(".lang-selectbox a").removeClass("lang-list__link-item--active")
-
-    // if (e.target.tagName === "A") {}
 
     SelectboxDropLangList.toggle();
   });
