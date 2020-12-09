@@ -10,11 +10,22 @@ $(document).ready(function () {
   const ShopFilters = $(".js-shop-filter");
   const ShopProducts = $(".js-shop-product");
   const GalleryList = $(".js-gallery-list");
-  const GalleryListItems = $(".js-gallery-list-item");
+  const GalleryPageSlider = $(".js-gallery-page-swiper");
+  const SelectboxLangList = $(".js-select-langlist");
+  const SelectboxDropLangList = $(".js-drop-langlist");
+  const SelectboxValueLangList = $(".js-value-langlist");
 
   let swiperActiveIndexGalleryPage = 0;
 
-  const SwiperForSales = $(".js-swiper").length ? new Swiper('.js-swiper', {
+  function checkDOMForSwiper(elm, obj) {
+    if ($(elm).length !== 0) {
+      return null
+    }
+
+    return new Swiper(elm, obj);
+  }
+
+  const SwiperForSales = checkDOMForSwiper('.js-swiper', {
     slidesPerView: "auto",
     centerInsufficientSlides: true,
     spaceBetween: 32,
@@ -25,9 +36,9 @@ $(document).ready(function () {
         slidesOffsetBefore: 130
       }
     }
-  }) : null;
+  });
 
-  const SwiperForInspiration = $(".js-inspiration-swiper").length ? new Swiper('.js-inspiration-swiper', {
+  const SwiperForInspiration = checkDOMForSwiper('.js-inspiration-swiper', {
     slidesPerView: "auto",
     observer: true,
     observeParents: true,
@@ -38,14 +49,14 @@ $(document).ready(function () {
         direction: "vertical"
       }
     }
-  }) : null;
+  });
 
-  const SwiperForShopFilters = $(".js-shop-filters-swiper").length ? new Swiper('.js-shop-filters-swiper', {
+  const SwiperForShopFilters = checkDOMForSwiper('.js-shop-filters-swiper', {
     slidesPerView: "auto",
     spaceBetween: 16,
-  }) : null;
+  });
 
-  const SwiperSaleList = $(".js-salelist-swiper").length ? new Swiper('.js-salelist-swiper', {
+  const SwiperSaleList = checkDOMForSwiper('.js-salelist-swiper', {
     slidesPerView: "auto",
     spaceBetween: 25,
     autoHeight: true,
@@ -55,18 +66,18 @@ $(document).ready(function () {
         spaceBetween: 30,
       }
     }
-  }) : null;
+  });
 
-  const SwiperGalleryThumbs = $(".js-gallery-thumbs-swiper").length ? new Swiper('.js-gallery-thumbs-swiper', {
+  const SwiperGalleryThumbs = checkDOMForSwiper('.js-gallery-thumbs-swiper', {
     spaceBetween: 16,
     slidesPerView: 6,
     freeMode: true,
     // watchSlidesVisibility: true,
     centerInsufficientSlides: true,
     initialSlide: swiperActiveIndexGalleryPage,
-  }) : null;
+  });
 
-  const SwiperGalleryTop = $(".js-gallery-top-swiper").length ? new Swiper('.js-gallery-top-swiper', {
+  const SwiperGalleryTop = checkDOMForSwiper('.js-gallery-top-swiper', {
     spaceBetween: 16,
     centerInsufficientSlides: true,
     initialSlide: swiperActiveIndexGalleryPage,
@@ -77,7 +88,7 @@ $(document).ready(function () {
     thumbs: {
       swiper: SwiperGalleryThumbs
     }
-  }) : null;
+  });
 
   if ($(window).scrollTop() >= HeaderMenu.height()) {
     HeaderMenu.addClass("page-header--bg-white");
@@ -154,27 +165,48 @@ $(document).ready(function () {
     });
   });
 
-  GalleryList.magnificPopup({
-    delegate: "figure",
-    type: "inline",
-    callbacks: {
-      open: function () {
-        if (SwiperGalleryTop && SwiperGalleryThumbs) {
-          SwiperGalleryTop.update();
-          SwiperGalleryThumbs.update();
-        }
-      },
-      elementParse: function (item) {
-        if (SwiperGalleryTop && SwiperGalleryThumbs) {
-          swiperActiveIndexGalleryPage = item.index;
+  if (GalleryList.length) {
+    GalleryList.magnificPopup({
+      delegate: "figure",
+      type: "inline",
+      callbacks: {
+        open: function () {
+          GalleryPageSlider.show();
 
-          SwiperGalleryTop.activeIndex = item.index;
-          SwiperGalleryThumbs.activeIndex = item.index;
+          if (SwiperGalleryTop && SwiperGalleryThumbs) {
+            SwiperGalleryTop.update();
+            SwiperGalleryThumbs.update();
+          }
+        },
+        close: function () {
+          GalleryPageSlider.hide();
+        },
+        elementParse: function (item) {
+          if (SwiperGalleryTop && SwiperGalleryThumbs) {
+            swiperActiveIndexGalleryPage = item.index;
 
-          SwiperGalleryTop.update();
-          SwiperGalleryThumbs.update();
-        }
-      },
+            SwiperGalleryTop.activeIndex = item.index;
+            SwiperGalleryThumbs.activeIndex = item.index;
+
+            SwiperGalleryTop.update();
+            SwiperGalleryThumbs.update();
+          }
+        },
+      }
+    });
+  }
+
+  SelectboxLangList.on("click", function(e) {
+    if (e.target.tagName === "A") {
+      SelectboxValueLangList.text(e.target.textContent);
     }
+
+    $(".lang-selectbox").toggleClass("lang-selectbox--up");
+
+    $(".lang-selectbox a").removeClass("lang-list__link-item--active")
+
+    // if (e.target.tagName === "A") {}
+
+    SelectboxDropLangList.toggle();
   });
 });

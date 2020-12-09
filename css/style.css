@@ -335,20 +335,32 @@ blockquote {
       .page-header__menu-list .menu-list__link:hover, .page-header__menu-list .menu-list__link--active {
         background-color: #FFC499;
         color: #fff; } }
-  .page-header__lang-list .lang-list__item:not(:nth-child(2)) {
-    margin-right: 16px; }
-  @media (max-width: 991px) {
-    .page-header__lang-list .lang-list__link {
-      color: #C7C7C7; } }
-  @media (min-width: 992px) {
-    .page-header__lang-list .lang-list__link {
-      color: #393939; } }
-  .page-header__lang-list .lang-list__link--active {
-    color: #FF994F; }
-  @media (max-width: 991px) {
-    .page-header__lang-list {
-      order: -1;
-      width: 100%; } }
+  .page-header__lang-list {
+    width: 35px; }
+    .page-header__lang-list .lang-list__items {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      position: absolute;
+      top: 120%;
+      left: 0;
+      width: 50px;
+      background-color: #fff; }
+    .page-header__lang-list .lang-list__link-item {
+      padding: 4px 0; }
+      @media (max-width: 991px) {
+        .page-header__lang-list .lang-list__link-item {
+          color: #C7C7C7; } }
+      @media (min-width: 992px) {
+        .page-header__lang-list .lang-list__link-item {
+          color: #393939; } }
+      .page-header__lang-list .lang-list__link-item:active, .page-header__lang-list .lang-list__link-item--active {
+        color: #FF994F; }
+    @media (max-width: 991px) {
+      .page-header__lang-list {
+        order: -1;
+        width: 100%; } }
   .page-header__social-list .social-list__item:not(:last-child) {
     margin-right: 10px; }
   .page-header__social-list .social-list__link {
@@ -411,12 +423,28 @@ blockquote {
       padding: 10px 20px; } }
 
 /* end .nav-list */
-.lang-list__link {
-  color: #393939;
-  font-size: 18px;
-  line-height: 24px;
-  transition: all 0.1s linear;
-  text-decoration: none; }
+.lang-list {
+  position: relative; }
+  .lang-list__link {
+    color: #393939;
+    text-decoration: none;
+    font-size: 18px;
+    line-height: 24px; }
+  .lang-list__link-item {
+    color: #393939;
+    font-size: 18px;
+    line-height: 24px;
+    transition: all 0.1s linear;
+    text-decoration: none; }
+
+.lang-selectbox {
+  width: 35px;
+  background-image: url(../img/drop-arrows.svg);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: right 10px; }
+  .lang-selectbox--up {
+    background-position: right -10px; }
 
 /* end .lang-list */
 @media (max-width: 991px) {
